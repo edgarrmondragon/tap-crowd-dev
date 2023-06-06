@@ -147,22 +147,22 @@ class Activities(CrowdDevQueryStream):
                 ),
                 th.Property(
                     "mixed",
-                    th.BooleanType,
+                    th.NumberType,
                     description="Whether the activity's sentiment is mixed",
                 ),
                 th.Property(
                     "neutral",
-                    th.BooleanType,
+                    th.NumberType,
                     description="Whether the activity's sentiment is neutral",
                 ),
                 th.Property(
                     "negative",
-                    th.BooleanType,
+                    th.NumberType,
                     description="Whether the activity's sentiment is negative",
                 ),
                 th.Property(
                     "positive",
-                    th.BooleanType,
+                    th.NumberType,
                     description="Whether the activity's sentiment is positive",
                 ),
                 th.Property(
@@ -433,7 +433,7 @@ class Organizations(CrowdDevQueryStream):
         th.Property("lastEnrichedAt", th.DateTimeType),
         th.Property("industry", th.StringType),
         th.Property("headline", th.StringType),
-        th.Property("founded", th.DateTimeType),
+        th.Property("founded", th.IntegerType),
         th.Property("empployeeCountByCountry", th.ObjectType()),
         th.Property("activeOn", th.ArrayType(th.StringType)),
         th.Property("identities", th.ArrayType(th.StringType)),
