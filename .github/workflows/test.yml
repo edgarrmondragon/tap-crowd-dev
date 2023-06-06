@@ -1,0 +1,48 @@
+name: Test tap-crowd-dev
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      SETUPTOOLS_USE_DISTUTILS: stdlib
+      PIP_CONSTRAINT: .github/workflows/constraints.txt
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3.5.2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4.6.1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Upgrade pip
+      run: |
+        pip install pip
+        pip --version
+
+    - name: Install Poetry
+      run: |
+        pipx install poetry
+        poetry --version
+
+    - name: Install tox
+      run: |
+        pipx install tox
+        tox --version
+
+    - name: Run lint command from tox.ini
+      env:
+        TAP_CROWD_DEV_TOKEN: ${{ secrets.TAP_CROWD_DEV_TOKEN }}
+        TAP_CROWD_DEV_START_DATE: ${{ secrets.TAP_CROWD_DEV_START_DATE }}
+      run: |
+        tox -e pytest

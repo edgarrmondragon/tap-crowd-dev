@@ -1,0 +1,38 @@
+version: 1
+send_anonymous_usage_stats: false
+project_id: tap-crowd-dev
+default_environment: dev
+environments:
+- name: dev
+plugins:
+  extractors:
+  - name: tap-crowd-dev
+    label: Crowd Dev
+    namespace: crowddev
+    description: Customer Data Platform for Open-Source startups
+    repository: https://github.com/edgarrmondragon/tap-crowd-dev
+    docs: https://github.com/edgarrmondragon/tap-crowd-dev#readme
+    pip_url: -e .
+    capabilities:
+    - state
+    - catalog
+    - discover
+    settings:
+    - name: tenant_id
+      kind: string
+      label: Tenant ID
+      description: Tenant ID for Crowd Dev
+    - name: token
+      kind: password
+      label: API Token
+      description: API Token for Crowd Dev
+    - name: start_date
+      kind: date_iso8601
+      label: Start Date
+      description: Earliest datetime to get data from
+    config:
+      start_date: "2023-06-05"
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
