@@ -45,7 +45,7 @@ jobs:
 
     - name: Run tests
       env:
-        TAP_CROWD_DEV_TENANT_ID: ${{ secrets.TAP_CROWD_TENANT_ID }}
+        TAP_CROWD_DEV_TENANT_ID: ${{ secrets.TAP_CROWD_DEV_TENANT_ID }}
         TAP_CROWD_DEV_TOKEN: ${{ secrets.TAP_CROWD_DEV_TOKEN }}
         TAP_CROWD_DEV_START_DATE: ${{ secrets.TAP_CROWD_DEV_START_DATE }}
       run: |
