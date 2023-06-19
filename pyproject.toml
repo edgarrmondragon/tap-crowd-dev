@@ -32,17 +32,6 @@ singer-sdk = {version="*", extras=["testing"]}
 # CLI declaration
 "tap-crowd-dev" = "tap_crowd_dev.tap:TapCrowdDev.cli"
 
-[tool.pytest.ini_options]
-addopts = "-vvv"
-
-[tool.mypy]
-python_version = "3.10"
-warn_unused_configs = true
-
-[[tool.mypy.overrides]]
-ignore_missing_imports = true
-module = ["backoff.*"]
-
 [tool.ruff]
 ignore = [
   "ANN101", # missing-type-self
@@ -70,3 +59,14 @@ required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.pydocstyle]
 convention = "google"
+
+[tool.pytest.ini_options]
+addopts = "-vvv"
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_configs = true
+
+[[tool.mypy.overrides]]
+ignore_missing_imports = true
+module = ["backoff.*"]
