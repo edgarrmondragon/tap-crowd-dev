@@ -25,7 +25,7 @@ python = "<3.12,>=3.7.1"
 singer-sdk = "0.28.0"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.3.2"
+pytest = "^7.4.0"
 singer-sdk = {version="*", extras=["testing"]}
 
 [tool.poetry.scripts]
