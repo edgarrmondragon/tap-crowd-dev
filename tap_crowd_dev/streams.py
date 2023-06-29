@@ -12,7 +12,7 @@ class Activities(CrowdDevQueryStream):
 
     name = "activities"
     path = "/activity/query"
-    primary_keys = ["id"]
+    primary_keys = ("id",)
     replication_key = None
 
     schema = th.PropertiesList(
@@ -236,7 +236,7 @@ class Members(CrowdDevQueryStream):
 
     name = "members"
     path = "/member/query"
-    primary_keys = ["id"]
+    primary_keys = ("id",)
     replication_key = None
 
     schema = th.PropertiesList(
@@ -386,7 +386,7 @@ class Organizations(CrowdDevQueryStream):
 
     name = "organizations"
     path = "/organization/query"
-    primary_keys = ["id"]
+    primary_keys = ("id",)
     replication_key = None
 
     schema = th.PropertiesList(
