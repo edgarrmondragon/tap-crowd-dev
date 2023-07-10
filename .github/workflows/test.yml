@@ -3,8 +3,24 @@ name: Test tap-crowd-dev
 on:
   push:
     branches: [main]
+    paths:
+      - tap_crowd_dev/**
+      - tests/**
+      - noxfile.py
+      - poetry.lock
+      - pyproject.toml
+      - .github/workflows/test.yml
+      - .github/workflows/constraints.txt
   pull_request:
     types: [opened, synchronize, reopened]
+    paths:
+      - tap_crowd_dev/**
+      - tests/**
+      - noxfile.py
+      - poetry.lock
+      - pyproject.toml
+      - .github/workflows/test.yml
+      - .github/workflows/constraints.txt
 
 jobs:
   test:
