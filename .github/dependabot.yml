@@ -8,7 +8,7 @@ updates:
   - package-ecosystem: pip
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "weekly"
       timezone: "UTC"
       time: "10:00"
     reviewers:
@@ -19,7 +19,7 @@ updates:
   - package-ecosystem: pip
     directory: "/.github/workflows"
     schedule:
-      interval: "daily"
+      interval: "monthly"
       timezone: "UTC"
       time: "10:00"
     commit-message:
@@ -29,7 +29,7 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
       timezone: "UTC"
       time: "10:00"
     reviewers:
