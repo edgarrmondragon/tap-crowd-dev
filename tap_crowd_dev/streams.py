@@ -436,7 +436,10 @@ class Organizations(CrowdDevQueryStream):
         th.Property("founded", th.IntegerType),
         th.Property("empployeeCountByCountry", th.ObjectType()),
         th.Property("activeOn", th.ArrayType(th.StringType)),
-        th.Property("identities", th.ArrayType(th.StringType)),
+        th.Property(
+            "identities",
+            th.ArrayType(th.CustomType({"type": ["string", "null"]})),
+        ),
         th.Property("lastActive", th.DateTimeType),
         th.Property("joinedAt", th.DateTimeType),
         th.Property("memberCount", th.IntegerType),
