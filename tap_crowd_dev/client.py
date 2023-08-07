@@ -69,7 +69,7 @@ class CrowdDevQueryStream(CrowdDevStream):
     def prepare_request_payload(
         self,
         context: dict | None,  # noqa: ARG002
-        next_page_token: t.Any | None,
+        next_page_token: int | None,
     ) -> dict | None:
         """Prepare request payload."""
         return {
