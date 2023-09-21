@@ -316,7 +316,7 @@ class Members(CrowdDevQueryStream):
         ),
         th.Property(
             "identities",
-            th.ArrayType(th.StringType),
+            th.ArrayType(th.CustomType({})),
         ),
         th.Property(
             "username",
@@ -438,7 +438,7 @@ class Organizations(CrowdDevQueryStream):
         th.Property("activeOn", th.ArrayType(th.StringType)),
         th.Property(
             "identities",
-            th.ArrayType(th.CustomType({"type": ["string", "null"]})),
+            th.ArrayType(th.CustomType({})),
         ),
         th.Property("lastActive", th.DateTimeType),
         th.Property("joinedAt", th.DateTimeType),
