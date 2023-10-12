@@ -55,18 +55,38 @@ class CrowdDevPaginator(BaseOffsetPaginator):
         return data["offset"] < data["count"]
 
 
-class CrowdDevQueryStream(CrowdDevStream):
-    """Crowd Dev stream class with default implementation for query streams."""
+class CrowdDevPaginatedStream(CrowdDevStream):
+    """Crowd Dev stream class with default implementation for paginated streams."""
 
     page_size = 100
     records_jsonpath = "$.rows[*]"
-    rest_method = "POST"
 
     def get_new_paginator(self) -> BaseAPIPaginator:
         """Return a new paginator object."""
         return CrowdDevPaginator(start_value=0, page_size=self.page_size)
 
+
+class CrowdDevQueryStream(CrowdDevPaginatedStream):
+    """Crowd Dev stream class with default implementation for query streams."""
+
+    rest_method = "POST"
+
     def prepare_request_payload(
+        self,
+        context: dict | None,  # noqa: ARG002
+        next_page_token: int | None,
+    ) -> dict | None:
+        """Prepare request payload."""
+        return {
+            "limit": self.page_size,
+            "offset": next_page_token,
+        }
+
+
+class CrowdDevGetStream(CrowdDevPaginatedStream):
+    """Crowd Dev stream class with default implementation for GET streams."""
+
+    def get_url_params(
         self,
         context: dict | None,  # noqa: ARG002
         next_page_token: int | None,

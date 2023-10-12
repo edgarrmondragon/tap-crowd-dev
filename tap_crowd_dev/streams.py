@@ -4,7 +4,19 @@ from __future__ import annotations
 
 from singer_sdk import typing as th
 
-from tap_crowd_dev.client import CrowdDevQueryStream
+from tap_crowd_dev.client import CrowdDevGetStream, CrowdDevQueryStream
+
+TagType = th.ObjectType(
+    th.Property("id", th.StringType),
+    th.Property("name", th.StringType),
+    th.Property("importHash", th.StringType),
+    th.Property("createdAt", th.DateTimeType),
+    th.Property("updatedAt", th.DateTimeType),
+    th.Property("deletedAt", th.DateTimeType),
+    th.Property("tenantId", th.StringType),
+    th.Property("createdById", th.StringType),
+    th.Property("updatedById", th.StringType),
+)
 
 
 class Activities(CrowdDevQueryStream):
@@ -230,6 +242,16 @@ class Activities(CrowdDevQueryStream):
         ),
     ).to_dict()
 
+    def prepare_request_payload(
+        self,
+        context: dict | None,
+        next_page_token: int | None,
+    ) -> dict | None:
+        """Prepare request payload."""
+        payload = super().prepare_request_payload(context, next_page_token) or {}
+        payload["orderBy"] = "createdAt_ASC"
+        return payload
+
 
 class Members(CrowdDevQueryStream):
     """Members stream."""
@@ -361,7 +383,7 @@ class Members(CrowdDevQueryStream):
         ),
         th.Property(
             "tags",
-            th.ArrayType(th.StringType),
+            th.ArrayType(TagType),
         ),
     ).to_dict()
 
@@ -399,7 +421,7 @@ class Organizations(CrowdDevQueryStream):
         th.Property("emails", th.ArrayType(th.StringType)),
         th.Property("phoneNumbers", th.ArrayType(th.StringType)),
         th.Property("logo", th.StringType),
-        th.Property("tags", th.ArrayType(th.StringType)),
+        th.Property("tags", th.ArrayType(TagType)),
         th.Property("website", th.StringType),
         th.Property("location", th.StringType),
         th.Property("github", th.ObjectType(th.Property("handle", th.StringType))),
@@ -444,4 +466,43 @@ class Organizations(CrowdDevQueryStream):
         th.Property("joinedAt", th.DateTimeType),
         th.Property("memberCount", th.IntegerType),
         th.Property("activityCount", th.IntegerType),
+    ).to_dict()
+
+
+class Automations(CrowdDevGetStream):
+    """Automations stream."""
+
+    name = "automations"
+    path = "/automation"
+    primary_keys = ("id",)
+    replication_key = None
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("type", th.StringType),
+        th.Property("tenantId", th.StringType),
+        th.Property("trigger", th.StringType),
+        th.Property("settings", th.ObjectType()),
+        th.Property("state", th.StringType),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property("lastExecutionAt", th.DateTimeType),
+        th.Property("lastExecutionState", th.StringType),
+        th.Property("lastExecutionError", th.ObjectType()),
+    ).to_dict()
+
+
+class Tags(CrowdDevGetStream):
+    """Tags stream."""
+
+    name = "tags"
+    path = "/tag"
+    primary_keys = ("id",)
+    replication_key = "updatedAt"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property("updatedAt", th.DateTimeType),
+        th.Property("tenantId", th.StringType),
     ).to_dict()

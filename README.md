@@ -19,15 +19,15 @@ Built with the [Meltano Singer SDK](https://sdk.meltano.com).
 Implemented:
 
 * `activities`
+* `automations`
 * `members`
 * `organizations`
+* `tags`
 
 Planned:
 
-* `automations`
 * `conversations`
 * `notes`
-* `tags`
 * `tasks`
 
 Log an issue if you need a stream that isn't listed here. PRs welcome!
