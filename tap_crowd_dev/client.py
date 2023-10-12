@@ -52,7 +52,8 @@ class CrowdDevPaginator(BaseOffsetPaginator):
     def has_more(self, response: Response) -> bool:
         """Return True if there are more pages to fetch."""
         data = response.json()
-        return data["offset"] < data["count"]
+        rows = data.get("rows", [])
+        return len(rows) > 0
 
 
 class CrowdDevPaginatedStream(CrowdDevStream):

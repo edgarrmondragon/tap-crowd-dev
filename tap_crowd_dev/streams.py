@@ -123,7 +123,14 @@ class Activities(CrowdDevQueryStream):
                 ),
                 th.Property(
                     "category",
-                    th.StringType,
+                    th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("name", th.StringType),
+                        th.Property("description", th.StringType),
+                        th.Property("emoji", th.StringType),
+                        th.Property("isAnswerable", th.BooleanType),
+                        th.Property("slug", th.StringType),
+                    ),
                     description="The activity's category",
                 ),
             ),
