@@ -123,7 +123,14 @@ class Activities(CrowdDevQueryStream):
                 ),
                 th.Property(
                     "category",
-                    th.StringType,
+                    th.ObjectType(
+                        th.Property("id", th.StringType),
+                        th.Property("name", th.StringType),
+                        th.Property("description", th.StringType),
+                        th.Property("emoji", th.StringType),
+                        th.Property("isAnswerable", th.BooleanType),
+                        th.Property("slug", th.StringType),
+                    ),
                     description="The activity's category",
                 ),
             ),
@@ -502,6 +509,29 @@ class Tags(CrowdDevGetStream):
     schema = th.PropertiesList(
         th.Property("id", th.StringType),
         th.Property("name", th.StringType),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property("updatedAt", th.DateTimeType),
+        th.Property("tenantId", th.StringType),
+    ).to_dict()
+
+
+class Conversations(CrowdDevGetStream):
+    """Conversations stream."""
+
+    name = "conversations"
+    path = "/conversation"
+    primary_keys = ("id",)
+    replication_key = None
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("activities", th.ArrayType(th.StringType)),
+        th.Property("title", th.StringType),
+        th.Property("slug", th.StringType),
+        th.Property("published", th.BooleanType),
+        th.Property("conversationStarter", th.ObjectType()),
+        th.Property("memberCount", th.IntegerType),
+        th.Property("lastActive", th.DateTimeType),
         th.Property("createdAt", th.DateTimeType),
         th.Property("updatedAt", th.DateTimeType),
         th.Property("tenantId", th.StringType),
