@@ -506,3 +506,26 @@ class Tags(CrowdDevGetStream):
         th.Property("updatedAt", th.DateTimeType),
         th.Property("tenantId", th.StringType),
     ).to_dict()
+
+
+class Conversations(CrowdDevGetStream):
+    """Conversations stream."""
+
+    name = "conversations"
+    path = "/conversation"
+    primary_keys = ("id",)
+    replication_key = None
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("activities", th.ArrayType(th.StringType)),
+        th.Property("title", th.StringType),
+        th.Property("slug", th.StringType),
+        th.Property("published", th.BooleanType),
+        th.Property("conversationStarter", th.ObjectType()),
+        th.Property("memberCount", th.IntegerType),
+        th.Property("lastActive", th.DateTimeType),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property("updatedAt", th.DateTimeType),
+        th.Property("tenantId", th.StringType),
+    ).to_dict()

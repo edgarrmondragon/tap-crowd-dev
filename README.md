@@ -20,13 +20,13 @@ Implemented:
 
 * `activities`
 * `automations`
+* `conversations`
 * `members`
 * `organizations`
 * `tags`
 
 Planned:
 
-* `conversations`
 * `notes`
 * `tasks`
 
