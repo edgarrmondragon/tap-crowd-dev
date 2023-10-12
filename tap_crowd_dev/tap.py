@@ -44,4 +44,6 @@ class TapCrowdDev(Tap):
             streams.Activities(tap=self),
             streams.Members(tap=self),
             streams.Organizations(tap=self),
+            streams.Automations(tap=self),
+            streams.Tags(tap=self),
         ]
