@@ -247,7 +247,8 @@ class Activities(CrowdDevQueryStream):
         context: dict | None,
         next_page_token: int | None,
     ) -> dict | None:
-        payload = super().prepare_request_payload(context, next_page_token)
+        """Prepare request payload."""
+        payload = super().prepare_request_payload(context, next_page_token) or {}
         payload["orderBy"] = "createdAt_ASC"
         return payload
 
