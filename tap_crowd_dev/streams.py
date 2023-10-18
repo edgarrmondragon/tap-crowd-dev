@@ -476,6 +476,78 @@ class Organizations(CrowdDevQueryStream):
     ).to_dict()
 
 
+class Notes(CrowdDevQueryStream):
+    """Notes stream."""
+
+    name = "notes"
+    path = "/note/query"
+    primary_keys = ("id",)
+    replication_key = "updatedAt"
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("body", th.StringType),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property("updatedAt", th.DateTimeType),
+        th.Property("members", th.ArrayType(th.ObjectType())),
+    ).to_dict()
+
+    def prepare_request_payload(
+        self,
+        context: dict | None,
+        next_page_token: int | None,
+    ) -> dict | None:
+        """Prepare request payload."""
+        payload = super().prepare_request_payload(context, next_page_token)
+
+        if payload and (start_date := self.get_starting_timestamp(context)):
+            payload["filter"] = {
+                "updatedAt": {
+                    "gte": start_date,
+                },
+            }
+
+        return payload
+
+
+class Tasks(CrowdDevQueryStream):
+    """Tasks stream."""
+
+    name = "tasks"
+    path = "/task/query"
+    primary_keys = ("id",)
+    replication_key = None
+
+    schema = th.PropertiesList(
+        th.Property("id", th.StringType),
+        th.Property("body", th.StringType),
+        th.Property("name", th.StringType),
+        th.Property("status", th.StringType),
+        th.Property("createdAt", th.DateTimeType),
+        th.Property("updatedAt", th.DateTimeType),
+        th.Property("members", th.ArrayType(th.ObjectType())),
+        th.Property("activities", th.ArrayType(th.ObjectType())),
+        th.Property("assignedTo", th.ObjectType()),
+    ).to_dict()
+
+    def prepare_request_payload(
+        self,
+        context: dict | None,
+        next_page_token: int | None,
+    ) -> dict | None:
+        """Prepare request payload."""
+        payload = super().prepare_request_payload(context, next_page_token)
+
+        if payload and (start_date := self.get_starting_timestamp(context)):
+            payload["filter"] = {
+                "updatedAt": {
+                    "gte": start_date,
+                },
+            }
+
+        return payload
+
+
 class Automations(CrowdDevGetStream):
     """Automations stream."""
 

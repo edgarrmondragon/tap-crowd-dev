@@ -47,4 +47,6 @@ class TapCrowdDev(Tap):
             streams.Automations(tap=self),
             streams.Tags(tap=self),
             streams.Conversations(tap=self),
+            streams.Notes(tap=self),
+            streams.Tasks(tap=self),
         ]

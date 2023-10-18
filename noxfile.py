@@ -30,7 +30,7 @@ nox.options.sessions = ("tests",)
 @session(python=python_versions)
 def tests(session: Session) -> None:
     """Execute pytest tests."""
-    deps = ["pytest", "pytest-durations"]
+    deps = ["pytest", "pytest-durations", "requests-cache"]
     if "GITHUB_ACTIONS" in os.environ:
         deps.append("pytest-github-actions-annotate-failures")
 
