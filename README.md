@@ -22,12 +22,9 @@ Implemented:
 * `automations`
 * `conversations`
 * `members`
+* `notes`
 * `organizations`
 * `tags`
-
-Planned:
-
-* `notes`
 * `tasks`
 
 Log an issue if you need a stream that isn't listed here. PRs welcome!
