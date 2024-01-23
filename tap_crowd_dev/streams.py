@@ -428,7 +428,7 @@ class Organizations(CrowdDevQueryStream):
         th.Property("description", th.StringType),
         th.Property("displayName", th.StringType),
         th.Property("emails", th.ArrayType(th.StringType)),
-        th.Property("tags", th.ArrayType()),
+        th.Property("tags", th.ArrayType(th.StringType)),
         th.Property("employeeCountByCountry", th.ObjectType()),
         th.Property("employees", th.IntegerType),
         th.Property("founded", th.ObjectType()),
