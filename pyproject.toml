@@ -24,7 +24,7 @@ documentation = "https://github.com/edgarrmondragon/tap-crowd-dev#readme"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<4"
-singer-sdk = "~=0.34.0"
+singer-sdk = "~=0.38.0"
 
 [tool.poetry.group.dev.dependencies]
 singer-sdk = { version = "*", extras = [
