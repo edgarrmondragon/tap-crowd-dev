@@ -8,7 +8,9 @@ requires = [
 name = "tap-crowd-dev"
 version = "0.0.1"
 description = "`tap-crowd-dev` is a Singer tap for Crowd Dev, built with the Meltano SDK for Singer Taps."
-authors = ["Edgar Ramírez-Mondragón <edgarrm358@gmail.com>"]
+authors = [
+  "Edgar Ramírez-Mondragón <edgarrm358@gmail.com>",
+]
 keywords = [
   "ELT",
   "singer.io",
@@ -25,44 +27,50 @@ python = ">=3.8,<4"
 singer-sdk = "~=0.34.0"
 
 [tool.poetry.group.dev.dependencies]
-singer-sdk = {version="*", extras=["testing"]}
-requests-cache = {version = "^1.1.0", python = "<4.0"}
+singer-sdk = { version = "*", extras = [
+  "testing",
+] }
+requests-cache = { version = "^1.1.0", python = "<4.0" }
 
 [tool.poetry.scripts]
 # CLI declaration
 "tap-crowd-dev" = "tap_crowd_dev.tap:TapCrowdDev.cli"
 
 [tool.ruff]
-line-length = 88
-src = ["tap_crowd_dev", "tests"]
 target-version = "py38"
 
-[tool.ruff.lint]
-ignore = [
+line-length = 88
+src = [
+  "tap_crowd_dev",
+  "tests",
+]
+lint.select = [
+  "ALL",
+]
+lint.ignore = [
   "ANN101", # missing-type-self
+  "COM812", # missing-trailing-comma
   "DJ",     # flake8-django
-  "COM812",  # missing-trailing-comma
-  "ISC001",  # single-line-implicit-string-concatenation
+  "ISC001", # single-line-implicit-string-concatenation
 ]
-select = ["ALL"]
-unfixable = [
-  "ERA001",  # commented-out-code
+lint.per-file-ignores."noxfile.py" = [
+  "ANN",
 ]
-
-[tool.ruff.lint.per-file-ignores]
-"noxfile.py" = ["ANN"]
-"tests/*" = [
-  "ANN201",  # missing-return-type-public-function
-  "S101",    # assert
-  "SLF001",  # private-member-access
+lint.per-file-ignores."tests/*" = [
+  "ANN201", # missing-return-type-public-function
+  "S101",   # assert
+  "SLF001", # private-member-access
 ]
-
-[tool.ruff.lint.isort]
-known-first-party = ["tap_crowd_dev"]
-required-imports = ["from __future__ import annotations"]
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"
+lint.unfixable = [
+  "ERA001", # commented-out-code
+]
+lint.isort.known-first-party = [
+  "tap_crowd_dev",
+]
+lint.isort.required-imports = [
+  "from __future__ import annotations",
+]
+lint.pydocstyle.convention = "google"
 
 [tool.pytest.ini_options]
 addopts = "-vvv"
@@ -73,4 +81,6 @@ warn_unused_configs = true
 
 [[tool.mypy.overrides]]
 ignore_missing_imports = true
-module = ["backoff.*"]
+module = [
+  "backoff.*",
+]
