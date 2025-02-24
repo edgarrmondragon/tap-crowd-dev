@@ -1,8 +1,8 @@
 # tap-crowd-dev
 
-## ⚠️ Looking for Maintainers! ⚠️  
+## ⚠️ Looking for Maintainers! ⚠️
 
-This project needs help! If you'd like to contribute as a maintainer, please reach out via  
+This project needs help! If you'd like to contribute as a maintainer, please reach out via
 [issues](https://github.com/edgarrmondragon/tap-crowd-dev/issues).
 
 Singer tap for [CrowdDev](https://crowd.dev).
