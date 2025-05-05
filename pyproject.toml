@@ -1,7 +1,7 @@
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = [
-  "poetry-core<2,>=1",
+  "poetry-core>=1,<2",
 ]
 
 [tool.poetry]
